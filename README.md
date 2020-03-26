@@ -6,7 +6,6 @@
 |email|string|null:false|
 
 ### Association
-- has_many :groups
 - has_many :messages
 - has_many :groups, through: :groups_users
 
@@ -27,10 +26,9 @@
 
 |column|Type|Options|
 |------|----|-------|
-|group_name|string|null:false|
+|name|string|null:false|
 
 ### Association
-- has_many :users
 - has_many :messages
 - has_many :users, through: :groups_users
 
@@ -42,8 +40,8 @@
 |group_id|integer|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :groups
-- belongs_to :users
+- belong_to :groups
+- belong_to :users
 
 
 
