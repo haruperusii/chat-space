@@ -4,19 +4,26 @@
       %p.chat-side__user-name__user-box__name
         = current_user.name
       .chat-side__user-name__user-box__item
-        = link_to "#", class: "btn" do
+        = link_to new_group_path do
           = icon("far","edit")
-        /= link_to "#", class: "btn" do
+        -# /= link_to new_group_url do
+        -#   -# = icon("far","edit")
+        -#      /= link_to new_group_path do
+        -#     //= link_to new_group_url do
+        -# //= link_to new_group_path do
+        -# //= link_to "#", class: "btn" do
         = link_to edit_user_path(current_user) do
           = icon("fas","cog")
          
           
   .chat-side__group-list
-    .chat-side__group-list__group-box
-      %p.chat-side__group-list__group-box__name 
-        techcamp
-      %p.chat-side__group-list__group-box__message  
-        まだメッセージがありません
+    - current_user.groups.each do |group|
+      .chat-side__group-list__group-box
+        = link_to '#' do
+          %p.chat-side__group-list__group-box__name 
+            = group.name
+          %p.chat-side__group-list__group-box__message  
+            まだメッセージがありません
 
     
     
