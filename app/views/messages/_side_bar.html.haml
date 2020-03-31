@@ -19,11 +19,11 @@
   .chat-side__group-list
     - current_user.groups.each do |group|
       .chat-side__group-list__group-box
-        = link_to '#' do
+        = link_to group_messages_path(group) do
           %p.chat-side__group-list__group-box__name 
             = group.name
           %p.chat-side__group-list__group-box__message  
-            まだメッセージがありません
+            = group.show_last_message
 
     
     
