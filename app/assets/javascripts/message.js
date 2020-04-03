@@ -2,7 +2,7 @@ $(function(){
   function buildHTML(message){
     if ( message.image ) {
       var html =
-       `<div class="chat-main__message-list__box">
+       `<div class="chat-main__message-list__box" data-message-id=${message.id}>
           <div class="chat-main__message-list__data">
             <p class="chat-main__message-list__data__name">
               ${message.user_name}
@@ -19,7 +19,7 @@ $(function(){
       return html;
     } else {
       var html =
-       `<div class="chat-main__message-list__box">
+       `<div class="chat-main__message-list__box" data-message-id=${message.id}>
           <div class="chat-main__message-list__data">
             <p class="chat-main__message-list__data__name">
               ${message.user_name}
@@ -35,6 +35,34 @@ $(function(){
       return html;
     };
   }
+
+  var reloadMessages = function() {
+    //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+    var last_message_id = $('.chat-main__message-list__box:last').data("message-id");
+    $.ajax({
+      //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
+      url: "api/messages",
+      //ルーティングで設定した通りhttpメソッドをgetに指定
+      type: 'get',
+      dataType: 'json',
+      //dataオプションでリクエストに値を含める
+      data: {id: last_message_id}
+    })
+    .done(function(messages) {
+      if (messages.length !== 0) {
+        var insertHTML = '';
+        $.each(messages, function(i, message) {
+          insertHTML += buildHTML(message)
+        });
+        $('.chat-main__message-list').append(insertHTML);
+        $('.chat-main__message-list').animate({ scrollTop: $('.chat-main__message-list')[0].scrollHeight});
+      }
+    })
+    .fail(function() {
+      alert('error');
+    });
+  };
+
   $('#new_message').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData(this);
@@ -57,5 +85,8 @@ $(function(){
     .fail(function() {
       alert("メッセージ送信に失敗しました");
     });
-});
+  })
+  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(reloadMessages, 7000);
+  }
 });
