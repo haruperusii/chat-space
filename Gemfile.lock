@@ -173,6 +173,7 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+<<<<<<< Updated upstream
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
     rspec-expectations (3.9.1)
@@ -190,6 +191,8 @@ GEM
       rspec-mocks (~> 3.9.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
+=======
+>>>>>>> Stashed changes
     ruby-vips (2.0.17)
       ffi (~> 1.9)
     ruby_parser (3.14.2)

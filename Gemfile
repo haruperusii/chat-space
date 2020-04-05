@@ -61,9 +61,13 @@ gem 'haml-rails'
 gem 'devise'
 gem 'pry-rails'
 gem 'carrierwave'
+<<<<<<< Updated upstream
 gem 'mini_magick'
 gem 'jquery-rails'
 
 group :production do
   gem 'unicorn', '5.4.1'
 end
+=======
+gem 'mini_magick'
+>>>>>>> Stashed changes

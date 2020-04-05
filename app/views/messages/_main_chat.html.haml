@@ -1,4 +1,5 @@
 .chat-main
+  = render @messages
   .chat-main__group-info
     .chat-main__group-info__leftbox
       %p.chat-main__group-info__leftbox__message
@@ -10,6 +11,7 @@
       = link_to edit_group_path(@group),class: "edit" do
         edit
   .chat-main__message-list
+<<<<<<< Updated upstream
     = render @messages
 
   .chat-main__message-form
@@ -22,3 +24,24 @@
             = f.file_field :image, class: 'hidden'
         = f.submit 'Send', class: 'form__submit'
     
+=======
+    .chat-main__message-list__box
+      .chat-main__message-list__data
+        %p.chat-main__message-list__data__name
+          = message.user.name
+        %p.chat-main__message-list__data__time
+          = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
+      - if message.content.present?    
+      %p.chat-main__message-list__box__message
+        = message.content
+      = image_tag message.image.url, class: 'lower-message__image' if message.image.present? 
+  .chat-main__message-form     
+    -# .form
+      -# = form_for [@group, @message] do |f|
+      -#   = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+        -# .form__mask
+        -#   = f.label :image, class: 'form__mask__image' do
+        -#     = icon('fas', 'image', class: 'icon')
+        -#     = f.file_field :image, class: 'hidden'
+        -# = f.submit 'Send', class: 'form__submit'
+>>>>>>> Stashed changes

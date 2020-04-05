@@ -7,5 +7,9 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   has_many :group_users
   has_many :groups, through: :group_users
+<<<<<<< Updated upstream
   has_many :messages      
+=======
+  has_many :messages
+>>>>>>> Stashed changes
 end
