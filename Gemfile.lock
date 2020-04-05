@@ -192,6 +192,7 @@ GEM
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
 =======
+
 >>>>>>> Stashed changes
     ruby-vips (2.0.17)
       ffi (~> 1.9)
