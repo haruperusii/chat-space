@@ -36,6 +36,33 @@ $(function(){
     };
   }
 
+  $(function() {
+  $('#new_message').on('submit', function(e){
+    e.preventDefault();
+    var formData = new FormData(this);
+    console.log(formData)
+    var url = $(this).attr('action');
+    console.log(url)
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: formData,
+      dataType: 'json',
+      processData: false,
+      contentType: false
+    })
+    .done(function(data){
+      var html = buildHTML(data);
+      $('.chat-main__message-list').append(html);
+      $('.chat-main__message-list').animate({ scrollTop: $('.chat-main__message-list')[0].scrollHeight});
+      $('form')[0].reset();
+      $('.form__submit').prop('disabled', false);
+    })
+    .fail(function() {
+      alert("メッセージ送信に失敗しました");
+    });
+  })
+
   var reloadMessages = function() {
     //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
     var last_message_id = $('.chat-main__message-list__box:last').data("message-id");
@@ -61,32 +88,36 @@ $(function(){
     .fail(function() {
       alert('error');
     });
+    if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+      setInterval(reloadMessages, 7000);
+    }
   };
+  });
 
-  $('#new_message').on('submit', function(e){
-    e.preventDefault();
-    var formData = new FormData(this);
-    var url = $(this).attr('action');
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: formData,
-      dataType: 'json',
-      processData: false,
-      contentType: false
-    })
-    .done(function(data){
-      var html = buildHTML(data);
-      $('.chat-main__message-list').append(html);
-      $('.chat-main__message-list').animate({ scrollTop: $('.chat-main__message-list')[0].scrollHeight});
-      $('form')[0].reset();
-      $('.form__submit').prop('disabled', false);
-    })
-    .fail(function() {
-      alert("メッセージ送信に失敗しました");
-    });
-  })
-  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
-    setInterval(reloadMessages, 7000);
-  }
+  // $('#new_message').on('submit', function(e){
+  //   e.preventDefault();
+  //   var formData = new FormData(this);
+  //   var url = $(this).attr('action');
+  //   $.ajax({
+  //     url: url,
+  //     type: "POST",
+  //     data: formData,
+  //     dataType: 'json',
+  //     processData: false,
+  //     contentType: false
+  //   })
+  //   .done(function(data){
+  //     var html = buildHTML(data);
+  //     $('.chat-main__message-list').append(html);
+  //     $('.chat-main__message-list').animate({ scrollTop: $('.chat-main__message-list')[0].scrollHeight});
+  //     $('form')[0].reset();
+  //     $('.form__submit').prop('disabled', false);
+  //   })
+  //   .fail(function() {
+  //     alert("メッセージ送信に失敗しました");
+  //   });
+  // })
+  // if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+  //   setInterval(reloadMessages, 7000);
+  // }
 });
