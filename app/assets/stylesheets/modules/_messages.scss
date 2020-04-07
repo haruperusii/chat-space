@@ -78,17 +78,17 @@ a{
     justify-content: space-between;
 
     &__leftbox{
-    margin-left: 40px;
-    margin-top: 35px;
-    &__message{
-      margin-bottom: 15px;
-      color: #333333;
-      font-size: 20px;
-    }
-    &__name{
-      color: #999999;
-      font-size: 12px;
-    }  
+      margin-left: 40px;
+      margin-top: 35px;
+      &__message{
+        margin-bottom: 15px;
+        color: #333333;
+        font-size: 20px;
+      }
+      &__name{
+        color: #999999;
+        font-size: 12px;
+      }  
     }
     &__rightbox{
       border:1px solid #38aef0;

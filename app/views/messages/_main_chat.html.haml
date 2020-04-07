@@ -4,8 +4,9 @@
       %p.chat-main__group-info__leftbox__message
         =@group.name
       %p.chat-main__group-info__leftbox__name
-      - @group.users.each do |user|
-        = user.name
+        Menber:
+        - @group.users.each do |user|
+          = user.name
     .chat-main__group-info__rightbox
       = link_to edit_group_path(@group),class: "edit" do
         edit
